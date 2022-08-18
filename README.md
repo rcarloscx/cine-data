@@ -4,9 +4,6 @@
 
 > pip install requests
 
-
-# WEB NODE APP
-
 ## Create the React App
 npx create-react-app .
 
@@ -16,7 +13,6 @@ npx create-react-app .
 ```
 docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 3000:3000 node:18-bullseye npm start
 ```
-## INSTALL
 ## INSTALL
 ```
 docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 3000:3000 node:18-bullseye npm install
