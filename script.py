@@ -33,9 +33,9 @@ dfgt=pd.DataFrame(cinesCA(cinemarkgt))
 dfhn=pd.DataFrame(cinesCA(cinemarkhn))
 dfni=pd.DataFrame(cinesCA(cinemarkni))
 
-dfsv.to_excel("CinemarkDataSv.xlsx", index=False)
-dfgt.to_excel("CinemarkDataGt.xlsx", index=False)
-dfhn.to_excel("CinemarkDatahn.xlsx" ,index=False)
-dfni.to_excel("CinemarkDatani.xlsx" ,index=False)
+dfsv.to_excel("public/CinemarkDataSv.xlsx", index=False)
+dfgt.to_excel("public/CinemarkDataGt.xlsx", index=False)
+dfhn.to_excel("public/CinemarkDatahn.xlsx" ,index=False)
+dfni.to_excel("public/CinemarkDatani.xlsx" ,index=False)
 
 print(dfsv)

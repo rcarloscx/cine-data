@@ -2,7 +2,7 @@
 var express = require('express')
 var app = express()
 
-var port = process.env.PORT || 8181  // establecemos nuestro puerto
+var port = process.env.PORT || 8181
 app.use(express.text())
 
 app.post('/', function(req, res) {

@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 
-function App() {
+function WebPage() {
 
   function sayHello() {
     alert('EJECUTANDO!');
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default WebPage;
