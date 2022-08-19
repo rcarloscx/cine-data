@@ -3,7 +3,17 @@
 function WebPage() {
 
   function sayHello() {
-    alert('EJECUTANDO!');
+    //alert('EJECUTANDO!');
+    const postHeader = { method: 'POST', body: "ls -l", headers: { 'Content-Type': 'text/plain' } }
+
+    const url = "http://" + window.location.hostname + ":8181";
+    fetch(url, postHeader).then(function (response) {
+      if (response.ok) {
+        console.log(response.text());
+      } else {
+        console.log('Respuesta de red OK pero respuesta HTTP no OK');
+      }
+    }).then(data => console.log(data));
   }
 
   return (
