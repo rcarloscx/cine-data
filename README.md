@@ -17,3 +17,7 @@ docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 3000:3
 ```
 docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 3000:3000 node:18-bullseye npm install
 ```
+## BASH/SHELL
+```
+docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 3000:3000 node:18-bullseye bash
+```

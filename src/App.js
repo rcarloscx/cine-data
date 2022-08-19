@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from './logo.svg';
 
 function App() {
+
+  function sayHello() {
+    alert('EJECUTANDO!');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="container-fluid p-5 bg-primary text-white text-center">
+      <h1>Trabajo Final - Cines</h1>
+      <p>Curso de Business Intelligence y Big Data Marzo 2022</p>
+      <button type="button" class="btn btn-warning" onClick={sayHello}>Ejecutar</button>
     </div>
   );
 }
