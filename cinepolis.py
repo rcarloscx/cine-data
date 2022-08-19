@@ -1,5 +1,6 @@
 import requests
 import json
+import pandas as pd
 
 complejosSv = 'https://www.cinepolis.com.sv/manejadores/CiudadesComplejos.ashx'
 complejosGt = 'https://www.cinepolis.com.gt/manejadores/CiudadesComplejos.ashx'
@@ -18,7 +19,7 @@ def carteleraPorPais(urlCine, complejos):
     pelis = []
     response = requests.get(complejos)
     data = response.json()
-    for ciudad in datos:
+    for ciudad in data:
         #Body para hacer post de la ciudad
         body = {'claveCiudad':''+ciudad['Clave'], 'esVIP': 'false'}
         jsonPeliculas = requests.post(urlCine, json = body).json()['d']
