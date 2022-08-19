@@ -13,7 +13,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "web": "PORT=8080 react-scripts start",
+    "web": "PORT=8080 npm start",
     "server": "PORT=8181 node src/NodeServer.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
