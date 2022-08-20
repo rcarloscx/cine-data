@@ -4,16 +4,20 @@ function WebPage() {
 
   function sayHello() {
     //alert('EJECUTANDO!');
-    const postHeader = { method: 'POST', body: "ls -l", headers: { 'Content-Type': 'text/plain' } }
-
     const url = "http://" + window.location.hostname + ":8181";
-    fetch(url, postHeader).then(function (response) {
-      if (response.ok) {
-        console.log(response.text());
-      } else {
-        console.log('Respuesta de red OK pero respuesta HTTP no OK');
-      }
-    }).then(data => console.log(data));
+    const postHeader = {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 
+        'content-type': 'text/plain',
+        'accept': 'text/plain'
+      },
+      body: "ls -la"
+    }
+
+    fetch(url, postHeader).then(response => response.text()).then((response) => {
+        console.log(response);
+    }).catch(err => console.log(err))
   }
 
   return (
