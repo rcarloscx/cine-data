@@ -1,14 +1,16 @@
 //API
-var express = require('express')
-var app = express()
+var cors = require('cors')
+var express = require('express');
 
-var port = process.env.PORT || 8181
-app.use(express.text())
+var port = 8181;
+var app = express();
+app.use(cors());
+app.use(express.text());
 
 app.post('/', function(req, res) {
     //INITIALIZE
     const txtComand = req.body;
-    console.log('Comand=' + txtComand)
+    console.log('Comand=' + txtComand);
 
     //EXECUTE
     const { exec } = require('child_process');
@@ -30,5 +32,13 @@ app.post('/', function(req, res) {
     });
 })
 
-app.listen(port)
-console.log('API escuchando en el puerto ' + port)
+app.get('/', function(req, res) {
+    //EXECUTE
+    const { exec } = require('child_process');
+    exec("ls -la", (error, stdout, stderr) => {
+        res.status(200).send(stdout);
+    });
+})
+
+app.listen(port);
+console.log('API escuchando en el puerto ' + port);
