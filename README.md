@@ -11,11 +11,11 @@ npx create-react-app .
 ## Container for Node React App Instance
 ## START WEB
 ```
-docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 8080:8080 -p 8181:8181 node:18-bullseye npm run web
+docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 8080:8080 node:18-bullseye npm run web
 ```
 ## START SERVER
 ```
-docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 8080:8080 -p 8181:8181 node:18-bullseye npm run server
+docker run -it --rm -u node -w /home/node/app -v ${PWD}:/home/node/app -p 8181:8181 node:18-bullseye npm run server
 ```
 ## INSTALL
 ```
