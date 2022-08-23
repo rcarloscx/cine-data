@@ -14,8 +14,7 @@ horariosUrl="https://cinemas.com.ni/filter-fandango/$IdCine/$Timestamp/$Formato/
 
 fechas=requests.get(fechasUrl).json()["FECHAS"]
 #Locales
-locales=localesUrl.replace('Timestamp', str(fechas[0]["Timestamp"]),1)
-cines=requests.get(locales).json()["LOCALES"]
+cines=requests.get(localesUrl.replace('Timestamp', str(fechas[0]["Timestamp"]),1)).json()["LOCALES"]
 
 print(cines)
 #Comentario
