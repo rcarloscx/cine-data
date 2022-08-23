@@ -13,14 +13,11 @@ horariosUrl="https://cinemas.com.ni/filter-fandango/$IdCine/$Timestamp/$Formato/
 #Iterar fechas
 
 fechas=requests.get(fechasUrl).json()["FECHAS"]
-for date in fechas:
-  #Locales
-  locales=localesUrl.replace('Timestamp', str(date["Timestamp"]),1)
-  cines=requests.get(locales).json()["LOCALES"]
+#Locales
+locales=localesUrl.replace('Timestamp', str(fechas[0]["Timestamp"]),1)
+cines=requests.get(locales).json()["LOCALES"]
 
-  print(cines)
-  #Comentario
-  
-  break
-    
+print(cines)
+#Comentario
+
 
