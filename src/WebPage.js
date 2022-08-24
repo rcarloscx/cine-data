@@ -1,27 +1,37 @@
-//import logo from './logo.svg';
+import React, { useState } from "react";
 
 function WebPage() {
 
-  function script1() {
+  //FILE CONST
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const script1 = () => {
     const url = "http://" + window.location.hostname + ":8181";
     const postHeader = {
       method: 'POST',
-      body: "python3 cinepolis.py"
+      body: "python3 script.py"
     }
     fetch(url, postHeader).then(response => response.text()).then((response) => {
       console.log(response);
     }).catch(err => console.log(err));
   }
 
-  function script2() {
+  const script2 = () => {
     const url = "http://" + window.location.hostname + ":8181";
     const postHeader = {
       method: 'POST',
-      body: "python3 cinepolis.py"
+      //body: "python3 cinepolis.py"
+      //body: "echo \"holaaa\""
+      body: "ls -la"
     }
     fetch(url, postHeader).then(response => response.text()).then((response) => {
       console.log(response);
     }).catch(err => console.log(err));
+  }
+
+  const uploadFile = (e) => {
+    const f = e.target.files[0];
+    console.log(f);
   }
 
   return (
@@ -31,7 +41,7 @@ function WebPage() {
         <p>Curso de Business Intelligence y Big Data Marzo 2022</p>
       </div>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <div class="row">
             <div class="col-12">
               <h3>Generar Archivos</h3>
@@ -40,35 +50,37 @@ function WebPage() {
             <div class="col-12">
               <h3>Cargar Archivos</h3>
               <div class="mb-1">
-                <label for="svFile" class="form-label">Excel - El Salvador</label>
-                <input class="form-control" type="file" id="svFile"></input>
-              </div>
-              <div class="mb-1">
-                <label for="crFile" class="form-label">Excel - Costa Rica</label>
-                <input class="form-control" type="file" id="crFile"></input>
-              </div>
-              <div class="mb-1">
-                <label for="gtFile" class="form-label">Excel - Guatemala</label>
-                <input class="form-control" type="file" id="gtFile"></input>
-              </div>
-              <div class="mb-3">
-                <label for="crFile" class="form-label">Excel - Honduras</label>
-                <input class="form-control" type="file" id="hnFile"></input>
-              </div>
-              <div class="mb-3">
-                <label for="crFile" class="form-label">Excel - Panama</label>
-                <input class="form-control" type="file" id="pnFile"></input>
-              </div>
-              <div class="mb-3">
-                <label for="ngFile" class="form-label">Excel - Nicaragua</label>
-                <input class="form-control" type="file" id="ngFile"></input>
+                <input
+                  class="form-control"
+                  type="file"
+                  value={selectedFile}
+                  onChange={uploadFile}
+                  multiple
+                />
               </div>
               <button type="button" class="btn btn-warning" onClick={script2}>Cargar</button>
             </div>
           </div>
         </div>
-        <div class="col-md-8 bg-light">
-
+        <div class="col-md-7">
+          <table class="table table-hover bg-light">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Archivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
