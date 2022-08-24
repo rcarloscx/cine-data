@@ -60,16 +60,17 @@ def cinesCA(cinesSV):
         data= requests.get(uri)
         datos=json.loads(data.content)
         for elements in datos[0]['movies']:
-            peliculas = []
-            peliculas.append(idcine)
-            peliculas.append(elements['title'])
-            peliculas.append(elements['rating'])
-            peliculas.append(elements['runtime'])
+
             for element2 in elements['movie_versions']:
+                peliculas = []
+                peliculas.append(idcine)
+                peliculas.append(elements['title'])
+                peliculas.append(elements['rating'])
+                peliculas.append(elements['runtime'])
                 peliculas.append(element2['title'])
                 for element3 in element2['sessions']:
                     peliculas.append(element3['hour'])
-            finalPeliculas.append(peliculas)
+                finalPeliculas.append(peliculas)
 
     return finalPeliculas
 
