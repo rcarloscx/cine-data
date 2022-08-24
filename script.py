@@ -97,6 +97,8 @@ def CinemaNi():
         dataCinema=[]
         dataCinema.append(cine['Nombre'])
         dataCinema.append(peliculas['NombrePelicula'])
+        dataCinema.append('N/A')
+        dataCinema.append('N/A')
         dataCinema.append(uri['Label'])
         horarios= horariosUrl.replace("$IdCine",cine['IdCinemas'],1)
         horarios= horarios.replace("$Timestamp",str(fechas[0]["Timestamp"]),1)
