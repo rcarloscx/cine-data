@@ -21,21 +21,22 @@ def CinemaNi():
     pelicula=pelicula.replace('$Timestamp',str(fechas[0]["Timestamp"]),1)
     pelicula=requests.get(pelicula).json()['PELICULAS']
     for peliculas in pelicula:
-      dataCinema=[]
-      dataCinema.append(cine['Nombre'])
-      dataCinema.append(peliculas['NombrePelicula'])
       url= formatoUrl.replace("$IdCine",cine['IdCinemas'],1)
       url=url.replace('$IdPelicula',peliculas['IdPelicula'],1)
       urls=requests.get(url).json()['FORMATO']
       for uri in urls:
+        dataCinema=[]
+        dataCinema.append(cine['Nombre'])
+        dataCinema.append(peliculas['NombrePelicula'])
         dataCinema.append(uri['Label'])
         horarios= horariosUrl.replace("$IdCine",cine['IdCinemas'],1)
         horarios= horarios.replace("$Timestamp",str(fechas[0]["Timestamp"]),1)
         horarios= horarios.replace("$Formato",uri['IdPeliculaVista'],1)
+        #Hay peliculas que no tienen horarios, se puede validar con el tamanio de la lista "horario"
         horario=requests.get(horarios).json()['HORARIOS']
         for funciones in horario:
           dataCinema.append(funciones['Hora'])
-      funcionesFinales.append(dataCinema)
+        funcionesFinales.append(dataCinema)
   return funcionesFinales
 dfcinema= pd.DataFrame(CinemaNi())
 dfcinema.to_excel("CinemaNi.xlsx", index=FALSE)
