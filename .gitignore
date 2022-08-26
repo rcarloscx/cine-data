@@ -3,6 +3,7 @@
 *__pycache__
 # Files
 *.xlsx
+*.xls
 # dependencies
 /node_modules
 /.pnp
