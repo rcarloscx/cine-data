@@ -60,7 +60,7 @@ CinemarkSV=[
 CinemarkGT=[
     {"id":2202,"nombre":"Arkadia","Ciudad":"Guatemala"},
     {"id":2208,"nombre":"Majadas Once","Ciudad":"Guatemala"}, 
-    {"id":2206,"nombre":"MetroCentro Villa Nueva","ciudad":"Villa Nueva"}
+    {"id":2206,"nombre":"MetroCentro Villa Nueva","Ciudad":"Villa Nueva"}
 ]
 CinemarkHN=[
     {"id":2207,"nombre":"Megaplaza La Ceiba", "Ciudad":"La Ceiba"},
