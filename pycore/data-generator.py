@@ -42,6 +42,7 @@ def carteleraPorPais(urlCine, complejos):
                     peli.append(cineCiudad['Name'])
                     peli.append(pelicula['Title'])
                     peli.append(cineCiudad['CityName'].split(',')[0])
+                    peli.append('Cinepolis')
                     peli.append(pelicula['Rating'])
                     peli.append(pelicula['RunTime'])
                     #pelis.append(peli)
