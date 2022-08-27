@@ -82,6 +82,15 @@ CinemarkCR=[
     {"id": 770,"nombre":"Multiplaza Escazú","Ciudad":"Escazú"}, 
     {"id":2210,"nombre":"Oxigeno","Ciudad":"Heredia"}
 ]
+
+#Diccionario Cinemas
+cinemas=[
+  {"IdCinemas":"CNM01", "Nombre":"Galerias","Ciudad":"Managua"},
+  {"IdCinemas":"CNM02", "Nombre":"PLAZA INTER","Ciudad":"Managua"},
+  {"IdCinemas":"CNM03","Nombre":"BELLO HORIZONTE", "Ciudad":"Managua"},
+  {"IdCinemas":"CNM05","Nombre":"MASAYA","Ciudad":"Masaya"}
+  ]
+
 def cinesCA(cinesSV):
     finalPeliculas=[]
     for idcine in cinesSV:
@@ -109,7 +118,7 @@ def CinemaNi():
   fechas=requests.get(fechasUrl).json()["FECHAS"]
   cines=requests.get(localesUrl.replace('Timestamp', str(fechas[0]["Timestamp"]),1)).json()["LOCALES"]
   funcionesFinales=[]
-  for cine in cines:
+  for cine in cinemas:
     pelicula=peliculasUrl.replace('$IdCine',cine['IdCinemas'],1)
     pelicula=pelicula.replace('$Timestamp',str(fechas[0]["Timestamp"]),1)
     pelicula=requests.get(pelicula).json()['PELICULAS']
@@ -121,6 +130,8 @@ def CinemaNi():
         dataCinema=[]
         dataCinema.append(cine['Nombre'])
         dataCinema.append(peliculas['NombrePelicula'])
+        dataCinema.append(cine['Ciudad'])
+        dataCinema.append("Cinemas")
         dataCinema.append('N/A')
         dataCinema.append('N/A')
         dataCinema.append(uri['Label'])
