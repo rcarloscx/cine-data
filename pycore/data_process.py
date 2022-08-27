@@ -1,25 +1,46 @@
-#IMPORTE DE SCRIPTS
-import pycore.scripts as curso
+#########################################1##########################################################
+import pycore.scripts as instancia1
 
-#ARCHIVOS CON LA DATA
-archivos = [
-    "data/El Salvador.xlsx",
-    "data/Costa Rica.xlsx",
-    "data/Guatemala.xls",
-    "data/Honduras.xls",
-    "data/Panama.xls",
-    "data/Nicaragua.xls"
+#RUTAS DE ARCHIVOS E INDEXES
+setArchivos1 = [
+    {"path":"data/El Salvador.xls", "starRow":4, "starCol":3},
+    {"path":"data/Costa Rica.xls", "starRow":4, "starCol":3},
+    {"path":"data/Guatemala.xls", "starRow":4, "starCol":3},
+    {"path":"data/Honduras.xls", "starRow":4, "starCol":3},
+    {"path":"data/Panama.xls", "starRow":4, "starCol":3},
+    {"path":"data/Nicaragua.xls", "starRow":4, "starCol":3}
 ]
 
-#SE RECORRE CADA UNO PARA CARGAR DATA
-for archivo in archivos:
-    #SE AGREGA EL NOMBRE DEL EXCEL A INSTANCIA
-    curso.addExcelFile(archivo)
+for archivo in setArchivos1:
+    instancia1.addExcelFile(archivo["path"], archivo["starRow"], archivo["starCol"])
     #SE ESTANDARIZA EL NOMBRE DEL EXCEL CON EXPRESSION REGULAR
-    curso.standardizeCol('Theatre Name', r'([a-zA-Z ]*)')
+    instancia1.estandarizarColLocal(0, r'([a-zA-Z ]*)')
 
 #curso.test()
 #len(curso.getAllData())
-finalDf = curso.joinAllDataFrames()
+finalDf = instancia1.joinAllDataFrames()
 finalDf.to_excel("data/finalDf.xlsx")
 
+
+
+#########################################2##########################################################
+import pycore.scripts as instancia2
+
+setArchivos2 = [
+    {"path":"data/our/El Salvador.xls", "starRow":1, "starCol":0},
+    {"path":"data/our/Costa Rica.xls", "starRow":1, "starCol":0},
+    {"path":"data/our/Guatemala.xls", "starRow":1, "starCol":0},
+    {"path":"data/our/Honduras.xls", "starRow":1, "starCol":0},
+    {"path":"data/our/Panama.xls", "starRow":1, "starCol":0},
+    {"path":"data/our/Nicaragua.xls", "starRow":1, "starCol":0}
+]
+
+for archivo in setArchivos1:
+    curso.addExcelFile(archivo["path"], archivo["starRow"], archivo["starCol"])
+    #SE ESTANDARIZA EL NOMBRE DEL EXCEL CON EXPRESSION REGULAR
+    curso.estandarizarColLocal(0, r'([a-zA-Z ]*)')
+
+#curso.test()
+#len(curso.getAllData())
+finalDf = instancia1.joinAllDataFrames()
+finalDf.to_excel("data/our/finalDf.xlsx")
