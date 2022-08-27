@@ -13,17 +13,16 @@ allDataFrames = []
 currentDataFrame = None
 resultDataFrame = None
 
-def addExcelFile(filename):
+def addExcelFile(filename, starRow, starCol):
     #GOBALS
     global currentDataFrame
     #SE LEE EL EXCEL
     df = pd.read_excel (
         filename,
-        #EMPIEZA FILA 2
-        header=2,
+        header=starRow,
     )
     #SE ELEIMINAN 2 PRIMERAS COLUMNAS
-    df = df.iloc[: , 2:]
+    df = df.iloc[: , starCol:]
     
     #SE OBITNE NOMBRE PAIS
     reResults = re.search(r"(\w*/)*([\w ]*)(.\w*)*", filename)
@@ -35,9 +34,11 @@ def addExcelFile(filename):
     currentDataFrame = df
     allDataFrames.append(df)
     
-def standardizeCol(colName, regularExpression):
+def standardizeColCiudad(colIndex, regularExpression):
     #GOBALS
     global currentDataFrame
+    #OBTENER EL NOMBRE DE LA COLUMNA
+    colName = currentDataFrame.columns[colIndex]
     #SE PASAN ARGUMENTOS A LA FUNCION DE "str.extract" DEL DF
     currentDataFrame[colName] = currentDataFrame[colName].str.extract(regularExpression)
 
