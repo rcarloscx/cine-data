@@ -34,17 +34,14 @@ def addExcelFile(filename, starRow, starCol):
     currentDataFrame = df
     allDataFrames.append(df)
     
-def standardizeColCiudad(colIndex, regularExpression):
+def estandarizarColLocal(colIndex, regularExpression):
     #GOBALS
     global currentDataFrame
-    #OBTENER EL NOMBRE DE LA COLUMNA
-    colName = currentDataFrame.columns[colIndex]
-    #SE PASAN ARGUMENTOS A LA FUNCION DE "str.extract" DEL DF
-    currentDataFrame[colName] = currentDataFrame[colName].str.extract(regularExpression)
+    #SE PASAN ARGUMENTOS A LA FUNCION DE "str.extract" DEL DF actual acorde la posicion
+    currentDataFrame.iloc[:, colIndex] = currentDataFrame.iloc[:, colIndex].str.extract(regularExpression)
 
-def test():
-    for dataF in allDataFrames:
-        print(dataF)
+def test(colIndex):
+    #return currentDataFrame.iloc[:, colIndex]
         
 def getAllData():
     return allDataFrames
