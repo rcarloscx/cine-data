@@ -52,26 +52,50 @@ def carteleraPorPais(urlCine, complejos):
 
 
 #CINEMARK
-cinemarksv={"Cinemark San Miguel":780, "Cinemark San Salvador":782,"Cinemark La Gran Vía":784}
-cinemarkgt={"Cinemark Arkadia":2202,"Cinemark Majadas Once":2208, "Cinemark MetroCentro Villa Nueva":2206}
-cinemarkhn={"Cinemark Megaplaza La Ceiba":2207,"Cinemark Citymall San Pedro Sula":774,"Galerias del Valle":2200,
-"Cinemark Citymall Tegucigalpa":2201,"Cinemark Multiplaza Tegucigalpa":771}
-cinemarkni={"Cinemark Metrocentro Managua":772}
-cinemarkpa={"Cinemark Albrook Mall":795, "Cinemark Pacific Center":2209}
-cinemarkcr={"Cinemark Citymall Alajuela":2204,"Cinemark Multiplaza Curridabat":773,
-"Cinemark Multiplaza Escazú": 770, "Cinemark Oxigeno":2210}
+CinemarkSV=[
+    {"id":780,"nombre":"Metrocentro San Miguel","Ciudad":"San Miguel"} ,
+    {"id":782,"nombre":"Metrocentro San Salvador", "Ciudad":"San Salvador"},
+    {"id":784,"nombre":"La Gran Vía", "Ciudad":"San Salvador"}
+]
+CinemarkGT=[
+    {"id":2202,"nombre":"Arkadia","Ciudad":"Guatemala"},
+    {"id":2208,"nombre":"Majadas Once","Ciudad":"Guatemala"}, 
+    {"id":2206,"nombre":"MetroCentro Villa Nueva","ciudad":"Villa Nueva"}
+]
+CinemarkHN=[
+    {"id":2207,"nombre":"Megaplaza La Ceiba", "Ciudad":"La Ceiba"},
+    {"id":774,"nombre":"Citymall San Pedro Sula", "Ciudad":"San Pedro Sula"},
+    {"id":2200,"nombre":"Galerias del Valle","Ciudad":"San Pedro Sula"},
+    {"id":2201,"nombre":"Citymall Tegucigalpa","Ciudad":"Tegucigalpa"},
+    {"id":771,"nombre":"Multiplaza Tegucigalpa", "Ciudad":"Tegucigalpa"}
+]
+CinemarkNI=[
+    {"id":772,"nombre":"Metrocentro Managua","Ciudad":"Managua"}
+]
+CinemarkPA=[
+    {"nombre":"Albrook Mall","id":795,"Ciudad":"Panama"},
+    {"nombre":"Pacific Center","id":2209,"Ciudad":"Panama"}
+]
+CinemarkCR=[
+    {"id":2204,"nombre":"Citymall Alajuela","Ciudad":"Alajuela"},
+    {"id":773,"nombre":"Multiplaza Curridabat","Ciudad":"Curridabat"},
+    {"id": 770,"nombre":"Multiplaza Escazú","Ciudad":"Escazú"}, 
+    {"id":2210,"nombre":"Oxigeno","Ciudad":"Heredia"}
+]
 def cinesCA(cinesSV):
     finalPeliculas=[]
     for idcine in cinesSV:
-        uri='https://api.cinemarkca.com/api/vista/data/billboard?cinema_id='+str(cinesSV[idcine])
+        uri='https://api.cinemarkca.com/api/vista/data/billboard?cinema_id='+str(idcine['id'])
         data= requests.get(uri)
         datos=json.loads(data.content)
         for elements in datos[0]['movies']:
 
             for element2 in elements['movie_versions']:
                 peliculas = []
-                peliculas.append(idcine)
+                peliculas.append(idcine['nombre'])
                 peliculas.append(elements['title'])
+                peliculas.append(idcine['Ciudad'])
+                peliculas.append('Cinemark')
                 peliculas.append(elements['rating'])
                 peliculas.append(elements['runtime'])
                 peliculas.append(element2['title'])
@@ -112,22 +136,22 @@ def CinemaNi():
 
 
 carteleraSv = carteleraPorPais(urlSv, complejosSv)
-carteleraSv.extend(cinesCA(cinemarksv))
+carteleraSv.extend(cinesCA(CinemarkSV))
 
 carteleraGt = carteleraPorPais(urlGt, complejosGt)
-carteleraGt.extend(cinesCA(cinemarkgt))
+carteleraGt.extend(cinesCA(CinemarkGT))
 
 carteleraCr = carteleraPorPais(urlCr, complejosCr)
-carteleraCr.extend(cinesCA(cinemarkcr))
+carteleraCr.extend(cinesCA(CinemarkCR))
 
 carteleraHn = carteleraPorPais(urlHn, complejosHn)
-carteleraHn.extend(cinesCA(cinemarkhn))
+carteleraHn.extend(cinesCA(CinemarkHN))
 
 carteleraPa = carteleraPorPais(urlPa, complejosPa)
-carteleraPa.extend(cinesCA(cinemarkpa))
+carteleraPa.extend(cinesCA(CinemarkPA))
 
 carteleraNi = CinemaNi()
-carteleraNi.extend(cinesCA(cinemarkni))
+carteleraNi.extend(cinesCA(CinemarkNI))
 
 dfsv=pd.DataFrame(carteleraSv)
 dfgt=pd.DataFrame(carteleraGt)
