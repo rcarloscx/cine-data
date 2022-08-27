@@ -41,6 +41,7 @@ def carteleraPorPais(urlCine, complejos):
                     #Aqui se imprime el nombre del cine
                     peli.append(cineCiudad['Name'])
                     peli.append(pelicula['Title'])
+                    peli.append(cineCiudad['CityName'].split(',')[0])
                     peli.append(pelicula['Rating'])
                     peli.append(pelicula['RunTime'])
                     #pelis.append(peli)
