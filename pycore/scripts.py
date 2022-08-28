@@ -21,19 +21,20 @@ def addExcelFile(filename, starRow, starCol):
         filename,
         header=starRow,
     )
-    #SE ELEIMINAN 2 PRIMERAS COLUMNAS
+    #SE ELIMINAN COLUMNAS SEGUN starCol
     df = df.iloc[: , starCol:]
-    
-    #SE OBITNE NOMBRE PAIS
-    reResults = re.search(r"(\w*/)*([\w ]*)(.\w*)*", filename)
-    nombrePais = reResults.group(2)
-    #SE AGREGA COLUMNA DEL PAIS CON NOMBRE DEL ARCHIVO AL INICIO DEL DF
-    df.insert(loc=0, column='Pais', value=nombrePais)
     
     #SE GUARDA EL DATAFRAME
     currentDataFrame = df
     allDataFrames.append(df)
-    
+
+def addColCountryFile(filename):
+    #SE OBITNE NOMBRE PAIS
+    reResults = re.search(r"(\w*/)*([\w ]*)(.\w*)*", filename)
+    nombrePais = reResults.group(2)
+    #SE AGREGA COLUMNA DEL PAIS CON NOMBRE DEL ARCHIVO AL INICIO DEL DF
+    currentDataFrame.insert(loc=0, column='Pais', value=nombrePais)
+
 def estandarizarColLocal(colIndex, regularExpression):
     #GOBALS
     global currentDataFrame
@@ -41,10 +42,19 @@ def estandarizarColLocal(colIndex, regularExpression):
     currentDataFrame.iloc[:, colIndex] = currentDataFrame.iloc[:, colIndex].str.extract(regularExpression)
 
 def test(colIndex):
+    #GOBALS
+    global allDataFrames
     #return currentDataFrame.iloc[:, colIndex]
         
 def getAllData():
+    #GOBALS
+    global allDataFrames
     return allDataFrames
+
+def getCurrentData():
+    #GOBALS
+    global currentDataFrame
+    return currentDataFrame
 
 def joinAllDataFrames():
     #GOBALS
