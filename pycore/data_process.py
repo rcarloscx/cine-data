@@ -25,7 +25,7 @@ for archivo in setArchivos1:
 #curso.test()
 #len(curso.getAllData())
 finalDf = instancia1.joinAllDataFrames()
-finalDf.to_excel("data/finalDf.xlsx")
+finalDf.to_excel("data/finalDf.xlsx", index=False)
 
 
 
@@ -49,4 +49,4 @@ for archivo in setArchivos1:
 #curso.test()
 #len(curso.getAllData())
 finalDf = instancia1.joinAllDataFrames()
-finalDf.to_excel("data/our/finalDf.xlsx")
+finalDf.to_excel("data/our/finalDf.xlsx", index=False)
