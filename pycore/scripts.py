@@ -61,3 +61,8 @@ def joinAllDataFrames():
     global resultDataFrame
     resultDataFrame = pd.concat(allDataFrames)
     return resultDataFrame
+
+def estandarizarColPeliculas(colNumber, accuracy):
+    #GOBALS
+    global currentDataFrame
+    print("STILL")
