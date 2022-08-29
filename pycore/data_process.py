@@ -1,5 +1,5 @@
 #########################################1##########################################################
-import pycore.scripts as instancia1
+import scripts as instancia1
 
 #RUTAS DE ARCHIVOS E INDEXES
 setArchivos1 = [
@@ -25,12 +25,21 @@ for archivo in setArchivos1:
 #curso.test()
 #len(curso.getAllData())
 finalDf = instancia1.joinAllDataFrames()
+#ELIMINANDO COLUMNAS DINERO REPETIDAS 
+finalDf=finalDf.drop(['mf_friday $', 'mf_thursday $','mf_saturday $'
+,'mf_sunday $','mf_wkend_rev $','mf_monday $','mf_tuesday $','mf_wednesday $','mf_rev $'],axis=1)
+#ELIMINANDO COLUMNAS PORCENTAJES
+finalDf=finalDf.drop(['%','%.1','%.2','%.3','%.4','%.5','%.6','%.7','%.8','%.9','%.10','%.11'
+,'%.12','%.13','%.14','%.15','%.16','%.17'],axis=1)
+#ELIMINANDO COLUMNAS VISITANTES REPETIDAS
+finalDf=finalDf.drop(['mf_thursday_xtns','mf_saturday_xtns','mf_sunday_xtns','mf_monday_xtns','mf_tuesday_xtns'
+,'mf_wednesday_xtns','mf_friday_xtns','mf_thursday_xtns.1','mf_xtns'],axis=1)
 finalDf.to_excel("data/finalDf.xlsx", index=False)
 
 
 
 #########################################2##########################################################
-import pycore.scripts as instancia2
+import scripts as instancia2
 
 setArchivos2 = [
     {"path":"data/our/El Salvador.xls", "starRow":1, "starCol":0},
