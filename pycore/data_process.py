@@ -36,6 +36,16 @@ finalDf=finalDf.drop(['mf_thursday_xtns','mf_saturday_xtns','mf_sunday_xtns','mf
 ,'mf_wednesday_xtns','mf_friday_xtns','mf_thursday_xtns.1','mf_xtns'],axis=1)
 finalDf.to_excel("data/finalDf.xlsx", index=False)
 
+#Formato de las columnas con dos decimales
+finalDf['Thu 18-Aug $'] = finalDf['Thu 18-Aug $'].apply('{:.2f}'.format)
+finalDf['Fri 19-Aug $'] = finalDf['Fri 19-Aug $'].apply('{:.2f}'.format)
+finalDf['Sat 20-Aug $'] = finalDf['Sat 20-Aug $'].apply('{:.2f}'.format)
+finalDf['Sun 21-Aug $'] = finalDf['Sun 21-Aug $'].apply('{:.2f}'.format)
+finalDf['Weekend\nGross $'] = finalDf['Weekend\nGross $'].apply('{:.2f}'.format)
+finalDf['Mon 22-Aug $'] = finalDf['Mon 22-Aug $'].apply('{:.2f}'.format)
+finalDf['Tue 23-Aug $'] = finalDf['Tue 23-Aug $'].apply('{:.2f}'.format)
+finalDf['Wed 24-Aug $'] = finalDf['Wed 24-Aug $'].apply('{:.2f}'.format)
+finalDf['Week\nGross $'] = finalDf['Week\nGross $'].apply('{:.2f}'.format)
 
 
 #########################################2##########################################################
