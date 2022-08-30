@@ -15,6 +15,13 @@ allDataFrames = []
 currentDataFrame = None
 resultDataFrame = None
 
+def addDF(df):
+    #GOBALS
+    global currentDataFrame
+    global allDataFrames
+    currentDataFrame = df
+    allDataFrames.append(df)
+
 def addExcelFile(filename, starRow, starCol):
     #GOBALS
     global currentDataFrame
@@ -58,6 +65,16 @@ def getCurrentData():
     #GOBALS
     global currentDataFrame
     return currentDataFrame
+
+def clearInstance():
+    #GOBALS
+    global allDataFrames
+    global currentDataFrame
+    global resultDataFrame
+    allDataFrames = []
+    currentDataFrame = None
+    resultDataFrame = None
+
 
 def joinAllDataFrames():
     #GLOBALS
