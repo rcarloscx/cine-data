@@ -8,6 +8,9 @@ from fuzzywuzzy import fuzz
 from itertools import product
 from fuzzywuzzy.fuzz import ratio
 
+#READ jsonFile
+import json
+
 allDataFrames = []
 currentDataFrame = None
 resultDataFrame = None
@@ -29,7 +32,8 @@ def addExcelFile(filename, starRow, starCol):
 
 def addColCountryFile(filename):
     #SE OBITNE NOMBRE PAIS
-    reResults = re.search(r"(\w*/)*([\w ]*)(.\w*)*", filename)
+    filename = filename.replace("_", " ", 1)
+    reResults = re.search(r"([\w-]*/)*([\w _]*)(.\w*)*", filename)
     nombrePais = reResults.group(2)
     #SE AGREGA COLUMNA DEL PAIS CON NOMBRE DEL ARCHIVO AL INICIO DEL DF
     currentDataFrame.insert(loc=0, column='Pais', value=nombrePais)
@@ -66,7 +70,7 @@ def find_closest(make):
 
 def keysFromCol(dframe, colNumber):
     col = dframe.iloc[:, colNumber]
-    keys = list(set(col))
+    keys = list(set(col))    
     return keys
 
 def dfRatios(keys):
@@ -75,6 +79,7 @@ def dfRatios(keys):
 
 def diccionarioPeliculas(ratios, accuracy):
     diccionario={}
+    print(ratios[ratios["ratio"]>70])
     for index, row in ratios.iterrows():
         #Cumple probabilidad
         if row["ratio"] >= accuracy:
@@ -105,18 +110,23 @@ def diccionarioPeliculas(ratios, accuracy):
     return diccionario
 
 def findKeyFromValue(diccionario, value):
-    for key in diccionario:
-        if value in diccionario[key]:
-            return diccionario[key][0]
-    return ""
-    
+    #Pelicula con diferentes nombres
+    for setPelis in diccionario:
+        if value in setPelis:
+            return setPelis[0]
+    #Pelicula Unica
+    return value
+
+def loadDicFromFile():
+    return json.load(open('diccionario.json'))
 
 def estandarizarColPeliculas(colNumber, accuracy):
     #GOBALS
     global currentDataFrame
-    tittleKeys = list(set(currentDataFrame.iloc[:, colNumber]))
-    ratios = pd.DataFrame([{'k1': k1, 'k2': k2, 'ratio': ratio(k1, k2)} for k1, k2 in product(tittleKeys, tittleKeys) if k1 != k2])
-    diccionario = diccionarioPeliculas(ratios, accuracy)
+    #tittleKeys = list(set(currentDataFrame.iloc[:, colNumber]))
+    #ratios = pd.DataFrame([{'k1': k1, 'k2': k2, 'ratio': ratio(k1, k2)} for k1, k2 in product(tittleKeys, tittleKeys) if k1 != k2])
+    #diccionario = diccionarioPeliculas(ratios, accuracy)
     #SE SUSTITUYE EL NOMBRE DE LA PELICULA SEGUN DICCIONARIO
+    diccionario = loadDicFromFile()
     currentDataFrame.iloc[:, colNumber] = currentDataFrame.iloc[:, colNumber].apply(lambda x: findKeyFromValue(diccionario, x))
     return currentDataFrame
