@@ -39,7 +39,8 @@ def carteleraPorPais(urlCine, complejos):
                 for formato in pelicula['Formats']:
                     peli = []
                     #Aqui se imprime el nombre del cine
-                    peli.append(cineCiudad['Name'])
+                    name = cineCiudad['Name'].replace("Cinépolis", "", 1)
+                    peli.append(name)
                     peli.append(pelicula['Title'])
                     peli.append(cineCiudad['CityName'].split(',')[0])
                     peli.append('Cinepolis')
@@ -173,10 +174,19 @@ dfni=pd.DataFrame(carteleraNi)
 dfcr=pd.DataFrame(carteleraCr)
 dfpa=pd.DataFrame(carteleraPa)
 
-dfsv.to_excel("data/our/El Salvador.xlsx", index=False)
-dfgt.to_excel("data/our/Guatemala.xlsx", index=False)
-dfhn.to_excel("data/our/Honduras.xlsx" ,index=False)
-dfni.to_excel("data/our/Nicaragua.xlsx" ,index=False)
-dfcr.to_excel("data/our/Costa Rica.xlsx", index=False)
-dfpa.to_excel("data/our/Panama.xlsx", index=False)
+#Crear folder del dia actual
+import datetime
+fecha = datetime.datetime.now().strftime("%d-%m-%y")
+import os
+report_path = "data/"+fecha
+if not os.path.exists(report_path):
+    os.makedirs(report_path)
+
+#Se exportan excels
+dfsv.to_excel(report_path+"/El_Salvador.xlsx", index=False)
+dfgt.to_excel(report_path+"/Guatemala.xlsx", index=False)
+dfhn.to_excel(report_path+"/Honduras.xlsx" ,index=False)
+dfni.to_excel(report_path+"/Nicaragua.xlsx" ,index=False)
+dfcr.to_excel(report_path+"/Costa_Rica.xlsx", index=False)
+dfpa.to_excel(report_path+"/Panama.xlsx", index=False)
 print(dfsv)
