@@ -1,6 +1,5 @@
 #IMPORTE DE PANDAS
 import pandas as pd
-
 #IMPORTE PARA EXPRESIONES REGULARES
 import re
 
@@ -74,8 +73,50 @@ def dfRatios(keys):
     ratios = pd.DataFrame([{'k1': k1, 'k2': k2, 'ratio': ratio(k1, k2)} for k1, k2 in product(keys, keys) if k1 != k2])
     return ratios
 
+def diccionarioPeliculas(ratios, accuracy):
+    diccionario={}
+    for index, row in ratios.iterrows():
+        #Cumple probabilidad
+        if row["ratio"] >= accuracy:
+            #Verificar si exite en diccionario, sino crearle conceptop array
+            keyText = row["k1"]
+            valText = row["k2"]
+
+            #Buscar val internamente
+            valueFound = False
+            for vals in diccionario:
+                if valText in vals:
+                    valueFound = True
+                    break
+            #Si val existe, no hacer nada
+            if valueFound:
+                continue
+
+            #Si no existe val internos, buscar en keys
+            keyFound = False
+            keyFound = keyText in diccionario
+            #Si val existe, no hacer nada
+            if not keyFound and not valueFound:
+                diccionario[keyText] = [keyText, valText]
+                continue
+            diccionario[keyText].append(valText)
+            #diccionario[keyText] = [valText]
+            
+    return diccionario
+
+def findKeyFromValue(diccionario, value):
+    for key in diccionario:
+        if value in diccionario[key]:
+            return diccionario[key][0]
+    return ""
+    
+
 def estandarizarColPeliculas(colNumber, accuracy):
     #GOBALS
     global currentDataFrame
     tittleKeys = list(set(currentDataFrame.iloc[:, colNumber]))
-    ratios = pd.DataFrame([{'k1': k1, 'k2': k2, 'ratio': ratio(k1, k2)} for k1, k2 in product(keys, keys) if k1 != k2])
+    ratios = pd.DataFrame([{'k1': k1, 'k2': k2, 'ratio': ratio(k1, k2)} for k1, k2 in product(tittleKeys, tittleKeys) if k1 != k2])
+    diccionario = diccionarioPeliculas(ratios, accuracy)
+    #SE SUSTITUYE EL NOMBRE DE LA PELICULA SEGUN DICCIONARIO
+    currentDataFrame.iloc[:, colNumber] = currentDataFrame.iloc[:, colNumber].apply(lambda x: findKeyFromValue(diccionario, x))
+    return currentDataFrame
