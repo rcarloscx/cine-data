@@ -28,15 +28,19 @@ finalDf = instancia1.joinAllDataFrames()
     
 ## Se Modican datos finalDf
 #SE SOLUCIONAN DECIMALES
-finalDf['Thu 18-Aug $'] = finalDf['Thu 18-Aug $'].apply('{:.2f}'.format)
-finalDf['Fri 19-Aug $'] = finalDf['Fri 19-Aug $'].apply('{:.2f}'.format)
-finalDf['Sat 20-Aug $'] = finalDf['Sat 20-Aug $'].apply('{:.2f}'.format)
-finalDf['Sun 21-Aug $'] = finalDf['Sun 21-Aug $'].apply('{:.2f}'.format)
-finalDf['Weekend\nGross $'] = finalDf['Weekend\nGross $'].apply('{:.2f}'.format)
-finalDf['Mon 22-Aug $'] = finalDf['Mon 22-Aug $'].apply('{:.2f}'.format)
-finalDf['Tue 23-Aug $'] = finalDf['Tue 23-Aug $'].apply('{:.2f}'.format)
-finalDf['Wed 24-Aug $'] = finalDf['Wed 24-Aug $'].apply('{:.2f}'.format)
-finalDf['Week\nGross $'] = finalDf['Week\nGross $'].apply('{:.2f}'.format)
+#finalDf['Thu 18-Aug $'] = finalDf['Thu 18-Aug $'].apply('{:.2f}'.format)
+#finalDf['Fri 19-Aug $'] = finalDf['Fri 19-Aug $'].apply('{:.2f}'.format)
+#finalDf['Sat 20-Aug $'] = finalDf['Sat 20-Aug $'].apply('{:.2f}'.format)
+#finalDf['Sun 21-Aug $'] = finalDf['Sun 21-Aug $'].apply('{:.2f}'.format)
+#finalDf['Weekend\nGross $'] = finalDf['Weekend\nGross $'].apply('{:.2f}'.format)
+#finalDf['Mon 22-Aug $'] = finalDf['Mon 22-Aug $'].apply('{:.2f}'.format)
+#finalDf['Tue 23-Aug $'] = finalDf['Tue 23-Aug $'].apply('{:.2f}'.format)
+#finalDf['Wed 24-Aug $'] = finalDf['Wed 24-Aug $'].apply('{:.2f}'.format)
+#finalDf['Week\nGross $'] = finalDf['Week\nGross $'].apply('{:.2f}'.format)
+
+for key in finalDf.keys():
+    if '$' in key
+        finalDf[key] = finalDf[key].apply('{:.2f}'.format)
 
 
 #ELIMINANDO COLUMNAS DINERO REPETIDAS 
